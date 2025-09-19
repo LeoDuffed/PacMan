@@ -140,16 +140,15 @@ def move():
                 vector(0, 5),
                 vector(0, -5),
             ]
-            valid_moves = [v for v in options if  valid(point + v)]
-
-        if valid(point + course):
-            point.move(course)
-        else:
+            valid_moves = [v for v in options if valid(point + v)]
 
             if valid_moves:
                 best = min(valid_moves, key=lambda v: abs((point + v) - pacman))
                 course.x, course.y = best.x, best.y
-                point.move(course)
+            else:
+                course.x, course.y = -course.x, -course.y
+
+            point.move(course)
 
         up()
         goto(point.x + 10, point.y + 10)
